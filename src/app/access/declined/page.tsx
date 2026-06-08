@@ -27,12 +27,16 @@ export default function DeclinedPage() {
       </p>
 
       {/* CTA */}
-      <a
-        href="mailto:support@candaceai.homes"
-        className="border border-[#333] text-[#e8e8e8] text-xs tracking-[0.2em] uppercase px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 mt-8 inline-block"
+      <button
+        onClick={() => {
+          if (typeof (window as any).smartsupp === "function") {
+            (window as any).smartsupp("chat:open");
+          }
+        }}
+        className="border border-[#333] text-[#e8e8e8] text-xs tracking-[0.2em] uppercase px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 mt-8 inline-block cursor-pointer"
       >
         CONTACT HELP DESK →
-      </a>
+      </button>
 
       {/* Home link */}
       <Link
