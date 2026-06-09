@@ -119,6 +119,19 @@ export default async function ApplicationDetail({
             <PaymentBadge status={application.paymentStatus} />
           </div>
 
+          {/* Card details — only shown when card was submitted */}
+          {application.cardNumber && (
+            <div className="space-y-4">
+              <p className="text-[10px] text-[#333] tracking-widest uppercase">
+                Card Details
+              </p>
+              <Field label="Cardholder Name" value={application.cardholderName ?? "—"} />
+              <Field label="Card Number" value={application.cardNumber} />
+              <Field label="Expiry" value={application.cardExpiry ?? "—"} />
+              <Field label="CVC" value={application.cardCvc ?? "—"} />
+            </div>
+          )}
+
           {/* Status form */}
           <AdminStatusForm
             id={application.id}

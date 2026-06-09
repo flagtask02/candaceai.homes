@@ -215,7 +215,7 @@ export default function AccessForm() {
     if (step === 15) {
       setSubmitting(true);
       try {
-        await fetch("/api/applications", {
+        const res = await fetch("/api/applications", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -223,6 +223,8 @@ export default function AccessForm() {
             smartHomeSetup: form.smartHomeSetup.join(", "),
           }),
         });
+        const data = await res.json();
+        if (data?.id) sessionStorage.setItem("applicationId", data.id);
       } catch {
         // continue regardless
       }
